@@ -4,12 +4,16 @@
 
 #define AVERAGE(x,y) (0.5 * x) + (0.5 * y)
 
+void tata(double **ptr, double *x)
+{
+    *ptr = x;
+}
+
 int main(void)
 {
-    long x = 10;
-    long y = 10;
-
-    double ave = 2*AVERAGE(x,y);
-
-    printf("%f", ave);
+    double *ptr, x = 1, y = 2;
+    ptr = &y;
+    printf("%f, %p, %p, %p\n", *ptr, ptr, &y, &x);
+    tata(&ptr, &x);
+    printf("%f, %p, %p, %p\n", *ptr, ptr, &y, &x);
 }
