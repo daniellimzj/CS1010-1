@@ -2,18 +2,19 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define AVERAGE(x,y) (0.5 * x) + (0.5 * y)
-
-void tata(double **ptr, double *x)
+void tata(long a, long* b)
 {
-    *ptr = x;
+    *(b + 1) = a;
+    b = &a;
 }
 
 int main(void)
 {
-    double *ptr, x = 1, y = 2;
-    ptr = &y;
-    printf("%f, %p, %p, %p\n", *ptr, ptr, &y, &x);
-    tata(&ptr, &x);
-    printf("%f, %p, %p, %p\n", *ptr, ptr, &y, &x);
+    long x[2] = {-5, 10};
+    long *p;
+
+    p =x;
+    tata(*p,x);
+
+    printf("%ld %ld\n", x[0], x[1]);
 }
