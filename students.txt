@@ -1,0 +1,15 @@
+A1234567
+Alice Tan
+F
+4.50
+Department of Computet Science
+A2345678
+Bob
+M
+4.2
+Deptm of IS
+A3456789
+Cath L
+F
+3.7
+Department of CS

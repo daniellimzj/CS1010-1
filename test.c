@@ -2,54 +2,67 @@
 #include <string.h>
 #include <stdlib.h>
 
-int binarySearch(int a[], int item, int low, int high)
-{
-    if (high <= low)
-        return (item > a[low]) ? (low + 1) : low;
-
-    int mid = (high + low) / 2;
-
-    if (a[mid] == item)
-    {
-        return mid + 1;
-    }
-
-    if (item > a[mid])
-    {
-        return binarySearch(a, item, mid + 1, high);
-    }
-    else
-    {
-        return binarySearch(a, item, low, mid - 1);
-    }
-}
-
-void insertionSort(int a[], int n)
-{
-    int i;
-    int j;
-
-    for (i = 1; i < n; i++) {
-        j = i -1;
-        int temp = a[i];
-        int loc = binarySearch(a, temp, 0, j);
-        while ( j >= loc) {
-            a[j+1] = a[j];
-            j--;
-        }
-        a[loc] = temp;
+func(char* s){
+    if (*s) {
+        func(s+1);
+        printf("%c", *s);
     }
 }
 
 int main(void)
 {
-    int a[5] = {12, 10, 17, 4, 7};
-
-    printf("%d %d %d %d %d\n", a[0], a[1], a[2], a[3], a[4]);
-
-    insertionSort(a, 5);
-
-    printf("%d %d %d %d %d\n", a[0], a[1], a[2], a[3], a[4]);
-
-    return 0;
+    char *title = "CS1010";
+    func(title);
+    printf("\n");
 }
+
+/*
+
+int main() {
+    int list[] = {9, 3, 2, 8,5,6,7,4,1,10};
+    int i,temp;
+
+    for (i=1;i<10;i++) {
+        if (list[i] > list [i-1])
+        {
+            temp = list[i];
+            list[i] = list [i+1];
+            list[i+1] = temp;
+        }
+    }
+    for (i=0;i<10;i++) {
+        printf("%d ", list[i]);
+    }
+    printf("\n");
+}
+
+int main(void) {
+    int n = 9;
+    if (n>10)
+        if (n>11)
+            printf("A\n");
+    else
+    {
+            printf("B\n");
+    }
+    
+}
+
+void mystery(int a, int *ptr_b, int arr_c[]) {
+    ptr_b = &(ary_c[2]);
+    ptr_b--;
+    *ary_c = *ptr_b;
+    ptr_b = &a;
+    *ptr_b++;
+    a += 2;
+    *ptr_b = a;
+    return;
+}
+
+void main() {
+    int a =1, *ptr_b, arr_c[] = {2,3,4};
+    ptr_b = arr_c;
+    mystery(a,ptr_b,arr_c);
+    printf("%d %d %d %d %d\n", a, *ptr_b, arr_c[0], arr_c[1], arr_c[2]);
+}
+*/
