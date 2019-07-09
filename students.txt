@@ -1,14 +1,14 @@
-A1234567
+A3456789
 Alice Tan
 F
 4.50
 Department of Computet Science
-A2345678
+A1234567
 Bob
 M
 4.2
 Deptm of IS
-A3456789
+A2345678
 Cath L
 F
 3.7

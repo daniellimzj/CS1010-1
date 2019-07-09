@@ -9,7 +9,7 @@ struct obj {
 
 void tata(struct obj *optr)
 {
-    optr->id = 20; //optr->id is the same as *optr.id
+    optr->id = 20; //optr->id is the same as (*optr).id
     optr->ptr = &optr->id;
 }
 
