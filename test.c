@@ -4,36 +4,51 @@
 #include <math.h>
 #include <ctype.h>
 
+typedef struct {
+    char name[51];
+    char gender;
+    int age;
+} cust_t;
+
+int readCustomers(cust_t customers[]) {
+    FILE *infile;
+
+    if ((infile = fopen("customer.dat", "r")) == NULL)
+    {
+        printf("Error opening file");
+        exit(1);
+    }
+
+    int size;
+
+    fscanf(infile, "%d", &size);
+
+    while (!feof(infile))
+    {
+        for (int i = 0; i < size; i++)
+        {
+            fscanf(infile, "%s %c %d", customers[i].name, &customers[i].gender, &customers[i].age);
+        }
+    }
+
+    fclose(infile);
+
+    return size;
+}
+
+float computeSimilarity(char name1[], char name2[]) {
+    
+}
+
 int main(void)
 {
-    int N = 8;
+    cust_t customers[5];
 
-    int mat[N][N];
-    int i , j , k, lower , upper , count;
+    int size = readCustomers(customers);
 
-    for (k = 0; k< N; k += N/4) {
-        lower =k;
-        upper =k+N/4;
-        count =0;
+    printf("%d\n", size);
 
-        for (i = k; i<N/4+k; i++) {
-            for (j=0;j<lower;j++)
-                mat[i][j] = 0;
-
-            for (j= lower; j<upper; j++)
-                mat[i][j] = ++count;
-
-            for (j=upper; j<N;j++)
-                mat[i][j] = 0;
-        }
+    for (int i = 0; i< size; i++) {
+        printf("%s %c %d\n", customers[i].name, customers[i].gender, customers[i].age);
     }
-
-    for (int i = 0; i < N; i ++) {
-        for (int j = 0; j < N; j ++) {
-            printf("%d ", mat[i][j]);
-        }
-        printf("\n");
-    }
-
-
 }
