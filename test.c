@@ -4,68 +4,24 @@
 #include <math.h>
 #include <ctype.h>
 
-int determinant(int mtx[][10], int size) {
-    for(int i = 0 ; i< size; i++) {
-            for (int j = 0 ; j <size; j ++) {
-                printf("%d ", mtx[i][j]);
-            }
-            printf("\n");
-        }
-    
-    if (size == 2)
-    {
-        return (mtx[0][0] * mtx[1][1]) - (mtx[0][1] * mtx[1][0]);
+void copynwords(char src[], char dest[], int n) {
+    dest[0] = '\0';
+    char *p = strtok(src, " ");
+    while (p!= NULL && n> 0) {
+        strcat(dest, p);
+        strcat(dest, " ");
+        p = strtok(NULL, " ");
+        n--;
     }
-
-    int sum = 0;
-    int i, j ,k, l, m, det;
-
-    for (l = 0; l < size; l++)
-    {
-        int newMtx[size - 1][10];
-
-            for (i = 1; i < size; i++)
-            {
-                m = 0;
-                for (j = 0; j < size; j++)
-                {
-                    if (j != l)
-                    {
-                        newMtx[i-1][m] = mtx[i][j];
-                        m++;
-                    }
-                }
-            }
-
-
-        for(i = 0 ; i< size -1; i++) {
-            for ( j = 0 ; j <size-1; j ++) {
-                printf("%d ", newMtx[i][j]);
-            }
-            printf("\n");
-        }
-
-        det = determinant(newMtx, size - 1);
-        printf("%d\n", det);
-
-        if (l%2) {
-            sum += -1*mtx[0][l]*det;
-        } else sum += mtx[0][l]*det;
-    }
-
-    return sum;
+    dest[strlen(dest) - 1] = '\0';
 }
 
 int main(void)
 {
-    int mtx[][10] = {{1,3,5,9},
-                    {1,3,1,7},
-                    {4,3,9,7},
-                    {5,2,0,9}};
+    char src[] = "Be the change you wish to see in the world";
+    char dest[256];
 
-    int det = determinant(mtx, 4);
+    copynwords(src, dest, 3);
 
-    printf("%d", det);
-
-    return 0;
+    puts(dest);
 }
