@@ -23,13 +23,14 @@ int main(void) {
 // Precond: size > 0
 int countJumps(int rocks[], int size) {
 	int i, count = 0, pos = 0;
-	while (pos + 50 <= rocks[size - 1]) {
+	while (pos + 50 < rocks[size - 1]) {
 		for (i = size - 1; i >= 0; i--) {
 			if (rocks[i] - rocks[i-1] > 50)
 				return -1;
 			if (rocks[i] <= pos + 50) {
 				pos = rocks[i];
 				count++;
+//				printf("%d %d\n", pos , count);
 				break;
 			}
 		}
