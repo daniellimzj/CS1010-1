@@ -116,25 +116,34 @@ int ave(int table[][MAX_COLUMNS], int size) {
 void rank(int table[][MAX_COLUMNS], int size) {
   int rank;
 
-  printf("Please input the rank (1 - %d)...", size);
+  printf("Please input the rank (1 - %d)...\n", size);
   scanf("%d", &rank);
 
-  bubble_sort
+  while (rank > size) {
+    printf("Invalid rank: %d\n", rank);
+    printf("Please input the rank (1 - %d)...\n", size);
+    scanf("%d", &rank);
+  }
 
+  bubble_sort(table, size);
+
+  printf("ID: %d, Score: %d\n", table[rank][0], table[rank][1]);
 }
 
 // Bubble sort table in increasing order of score
 void bubble_sort(int table[][MAX_COLUMNS], int size) {
-  int i, limit, temp;
+  int i, j, limit, temp;
   
   for (limit = size-2; limit >= 0; limit--) {
     // limit is where the inner loop variable i should end
     for (i=0; i<=limit; i++) {
-      if (table[i] > table[i+1]) {
+      if (table[i][1] > table[i+1][1]) {
         // swap table[i] with table[i+1]
-        temp = table[i];
-        table[i] = table[i+1];
-        table[i+1] = temp;
+        for (j = 0; j < MAX_COLUMNS; j++) {
+          temp = table[i][j];
+          table[i][j] = table[i+1][j];
+          table[i+1][j] = temp;
+        }
       }
     }
   }  
