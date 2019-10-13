@@ -12,9 +12,16 @@
 
 #define TRUE 1
 #define MAX_COMMAND_LENGTH 100
+#define MAX_ENTRIES 100
+#define MAX_COLUMNS 2
 
 /* Function prototypes */
 void print_help();
+void insert_table(int[][MAX_COLUMNS], int);
+int sum(int[][MAX_COLUMNS], int);
+int ave(int[][MAX_COLUMNS], int);
+void rank(int[][MAX_COLUMNS], int);
+void bubble_sort(int[][MAX_COLUMNS], int);
 
 int main(void) {
   
@@ -23,7 +30,7 @@ int main(void) {
 
   // TO BE IMPLEMENTED
   // How to represent the table and other information...
-
+  int table[MAX_ENTRIES][MAX_COLUMNS], num_entries = 0, sum_score, ave_score, i;
 
   // print welcome information
   printf("Welcome to Nanotable!\n");
@@ -39,28 +46,33 @@ int main(void) {
       printf("See you!\n");
       break;
     } else if (strcmp(input,"sum") == 0) {
-      if (TRUE)/* Need to determine whether the table is empty...*/ {
+      if (num_entries == 0) {
 	printf("The table is empty\n");
       } else {
-	// TO BE IMPLEMENTED
-	printf("The sum of score is %d\n", 1);
+        sum_score = sum(table, num_entries);
+	printf("The sum of score is %d\n", sum_score);
       }
     } else if (strcmp(input,"ave") == 0) {
-      if (TRUE) {
+      if (num_entries == 0) {
 	printf("The table is empty\n");
       } else {
-	// TO BE IMPLEMENTED
-	printf("The average of score is %d\n", 1);
+        ave_score = ave(table, num_entries);
+	printf("The average of score is %d\n", ave_score);
       }
     } else if (strcmp(input,"insert") == 0) {
-      // TO BE IMPLEMENTED
+      insert_table(table, num_entries);
+      num_entries++;
     } else if (strcmp(input,"init") == 0) {
-      // TO BE IMPLEMENTED
+      for (i = 0; i < num_entries; i++) {
+        table[i][0] = 0;
+        table[i][1] = 0;
+      }
+      num_entries = 0;
     } else if (strcmp(input,"rank") == 0) {
-      if (TRUE) {        
+      if (num_entries == 0) {        
 	printf("The table is empty\n");
       } else {
-	// TO BE IMPLEMENTED
+        rank(table, num_entries);
       }
     } else {
       printf("No such command: %s, please input command again!\n", input);
@@ -74,3 +86,57 @@ void print_help() {
   printf("Commands available: insert, init, sum, ave, rank, help, exit\n");
 }
 
+void insert_table(int table[][MAX_COLUMNS], int size) {
+  printf("Please input the student's ID...\n")
+  scanf("%d", &table[size][0])
+  printf("Please input the student's score...\n")
+  scanf("%d", &table[size][1])
+}
+
+int sum(int table[][MAX_COLUMNS], int size) {
+  int i, sum_score = 0;
+  
+  for(i = 0; i < size; i++) {
+    sum_score += table[i][1];
+  }
+
+  return sum_score;
+}
+
+int ave(int table[][MAX_COLUMNS], int size) {
+  int sum_score, ave_score;
+
+  sum_score = sum(table, size);
+
+  ave_score = sum / size;
+
+  return ave_score;
+}
+
+void rank(int table[][MAX_COLUMNS], int size) {
+  int rank;
+
+  printf("Please input the rank (1 - %d)...", size);
+  scanf("%d", &rank);
+
+  bubble_sort
+
+}
+
+// Bubble sort table in increasing order of score
+void bubble_sort(int table[][MAX_COLUMNS], int size) {
+  int i, limit, temp;
+  
+  for (limit = size-2; limit >= 0; limit--) {
+    // limit is where the inner loop variable i should end
+    for (i=0; i<=limit; i++) {
+      if (table[i] > table[i+1]) {
+        // swap table[i] with table[i+1]
+        temp = table[i];
+        table[i] = table[i+1];
+        table[i+1] = temp;
+      }
+    }
+  }  
+}
+  
