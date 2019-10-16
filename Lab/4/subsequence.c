@@ -22,7 +22,7 @@ int main(void)
 	sum_subsequence(list, size, answers);
 
 	printf("Max sum %d of %d-interval subsequence starting at position %d.\n",
-		   answers[0], answers[1], answers[2]);
+			answers[0], answers[1], answers[2]);
 
 	return 0;
 }
@@ -57,17 +57,17 @@ void sum_subsequence(int arr[], int size, int ans[])
 	for (k = 1; k <= size; k++) {
 		// Repeat for different starting positions k times.
 		for (i = 0; i < k; i++) {
-			// Move the position by k spaces and sum the values.
-			for (j = 0; j < size; j += k) {
+			// Move the position j by k spaces and sum the values.
+			for (j = i; j < size; j += k) {
 				sum += arr[j];
 			}
-
 			// If the sum is higher than the current max, replace the values in ans.
 			if (sum > ans[0]) {
 				ans[0] = sum;
 				ans[1] = k;
-				ans[2] = j;
+				ans[2] = i;
 			}
+
 
 			// Reset the sum to 0 for the next subsequence.
 			sum = 0;

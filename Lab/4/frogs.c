@@ -27,7 +27,7 @@ int main(void) {
 	printf("Please enter the length of the bridge: ");
 	scanf("%d", &lengthOfBridge);
 
- 	for (i=0; i<lengthOfBridge; i++) {
+	for (i=0; i<lengthOfBridge; i++) {
 		int frogType;
 
 		printf("Please insert frogs at position %d: ", i);
@@ -55,7 +55,7 @@ int main(void) {
 			printBridge(lengthOfBridge, bridge);
 		}
 		else {
-			printf("Invalid move!");
+			printf("Invalid move!\n");
 		}
 
 		// Find the new gameState to end the game or keep on going.
@@ -64,9 +64,9 @@ int main(void) {
 
 	// Print the result based on the last gameState.
 	if (gameState == 1)
-		printf("Congratulations! The frogs took %d jumps to cross the bridge!", numMoves);
+		printf("Congratulations! The frogs took %d jumps to cross the bridge!\n", numMoves);
 	else
-		printf("Oh no! It seems like the two clans of frogs are stuck!");
+		printf("Oh no! It seems like the two clans of frogs are stuck!\n");
 
 	return 0;
 }
@@ -117,7 +117,7 @@ int jump(int position, int size, int bridge[]) {
 			return 1;
 		}
 	}
-	
+
 	if (bridge[position] == -1) {
 		// If the frog facing left is at the first position the move is invalid.
 		if (position == 0)
@@ -128,7 +128,7 @@ int jump(int position, int size, int bridge[]) {
 			swapPosition(position, position - 1, bridge);
 			return 1;
 		}
-		
+
 		// If it is in the second position and the first position isn't empty then the move is invalid.
 		if (position == 1)
 			return 0;
@@ -144,6 +144,7 @@ int jump(int position, int size, int bridge[]) {
 	return 0;
 }
 
+// This function swaps the position of two frogs on the bridge.
 void swapPosition(int pos1, int pos2, int bridge[]) {
 	int temp;
 
@@ -159,9 +160,10 @@ int checkGameState(int size, int bridge[]) {
 
 	// Firstly, find the position of the empty space.
 	for (i = 0; i < size; i++) {
-		if (bridge[i] == 0)
+		if (bridge[i] == 0) {
 			empty = i;
 			break;
+		}
 	}
 
 	// This first part checks if all frogs have made it across the bridge.
@@ -183,18 +185,18 @@ int checkGameState(int size, int bridge[]) {
 	}
 
 	// The next part will check if the frogs are stuck.
-	// If both spaces on the left of the empty space have frogs facing left, neither of them can jump to it.
+	// If both spaces on the left of the empty space have frogs facing left, neither of can jump to it.
 	// Also need to check if the empty space is at or near the start.
 	if (bridge[empty - 1] == -1 && (empty == 1 || (empty > 1 && bridge[empty - 2] == -1)))
 		leftCheck = -1;
 
-	// If both spaces on the right of the empty space have frogs facing right, neither of them can jump to it.
+	// If both spaces on the right of the empty space have frogs facing right, neither of can jump to it.
 	// Also need to check if the empty space is at or near the end.
 	if (bridge[empty + 1] == 1 && (empty == size - 2 || (empty < size - 2 && bridge[empty + 2] == 1)))
 		rightCheck = -1;
 
 	// If none of the frogs on the 2 left and right spaces next to the empty space can jump to it, they are stuck.
-	if (leftCheck + rightCheck == -2)
+	if ((leftCheck + rightCheck == -2) || (empty == 0 && rightCheck == -1) || (empty == size - 1 && leftCheck == -1))
 		return -1;
 
 	// If neither end states are true, return 0 to keep the simulation running
